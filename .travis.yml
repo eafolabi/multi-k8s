@@ -5,7 +5,8 @@ before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
-    # gcloud auth activate-service-account --key-file service-account.json
+  - openssl aes-256-cbc -K $encrypted_d1fa5e9f9bde_key -iv $encrypted_d1fa5e9f9bde_iv -in service-account.json.enc -out service-account.json -d  
+  - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project ardent-turbine-235804
   - gcloud config set compute/zone  us-west1-b
   - gcloud container clusters get-credentials multi-cluster
@@ -15,7 +16,6 @@ env:
   global:
      - SHA=$(git rev-parse HEAD)
      - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-     - secure: mY9rahYqnx9OaE7oQ0y+Vc5fYp3IAyvLL2JS/GiGd3SBCFskQTLGGs9eCyjxRzCy9Ua6hokJEl3P+w3kiIVzmiaoIKIninyt7KpgJCh/Uj7VBlAnxqqhqHvqVY6arw/CwOhAC/BAx8cniADbuRUOyocDUqkFo9cQcYPXZbD1rEietmFRIlgeT9IUSGgz785NPiI2uA4OXOy86JfIr7hORTzp8NaZxxrMv/If9uTfwkDGIjXIrPDoazzHxQ/GFgscxPhYdgnU486YE03O6pN4WBqy3Up9enLRtopx5fh1zFM2L4Ix/FAjEncTa6fLbB0ew2fNYRvXWwuo3+Qi+k9l3/lme0iA2QuImzvcEnZ++sx9IQM+ct5hNVOWWgsFKLSnYYZR5aN2tCneeeQ1wBhgHIUxnsXDQW8lJJU2ldvCbr0PGGiW7nOQA8+Cgbt4QsMsDOckdyoyqpbxv1QWlGReV8jxO3nNxBFzCIUd0UkBXV9jOyP0jbiM+As3blS4D7RgtOwu3BTjVn9jV9PZ71td0ydS73AMUY8cpn1DWNn5bqVxK4Q2rjmmZGLFvtUtMTItVRc5sYJHmSa2JYdqjQ/cXYtn1J36O4+M5iDvMR3Z3XYH6icui9m29IX5wa+ku++0A88DoNNV+FvjtmeX83bXxraKFvDmFbyZuUiDQVIVWtQ=
 
 script:
   - docker run eafolabi/multi-dockerreact npm test -- --coverage
