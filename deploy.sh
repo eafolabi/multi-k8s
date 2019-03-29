@@ -15,5 +15,5 @@ docker push eafolabi/multi-server:$SHA
 kubectl apply -f k8s-multi
 
 kubectl set image deployments/server-deployment server=eafolabi/multi-server:$SHA
-kubectl set image deployments/worker-deployment server=eafolabi/multi-worker:$SHA
-kubectl set image deployments/client-deployment server=eafolabi/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=eafolabi/multi-worker:$SHA
+kubectl set image deployments/client-deployment client=eafolabi/multi-client:$SHA
