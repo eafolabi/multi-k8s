@@ -18,7 +18,7 @@ env:
      - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 script:
-  - docker run eafolabi/multi-dockerreact npm test -- --coverage
+  - docker run eafolabi/multi-react-test npm test -- --coverage
 
 
 deploy:
